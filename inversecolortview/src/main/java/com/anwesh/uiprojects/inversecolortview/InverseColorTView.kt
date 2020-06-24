@@ -13,8 +13,9 @@ import android.graphics.Color
 import android.content.Context
 import android.app.Activity
 
+val parts : Int = 2
 val colors : Array<String> = arrayOf("#3F51B5", "#F44336", "#4CAF50", "#03A9F4", "#009688")
-val scGap : Float = 0.02f
+val scGap : Float = 0.02f / parts
 val sizeFactor : Float = 5.6f
 val backColor : Int = Color.parseColor("#BDBDBD")
 val delay : Long = 20
@@ -27,8 +28,8 @@ fun Float.sinify() : Float = Math.sin(this * Math.PI).toFloat()
 fun Canvas.drawInverseColorT(scale : Float, w : Float, h : Float, paint : Paint) {
     val size : Float = w / sizeFactor
     val sf : Float = scale.sinify()
-    val sf1 : Float = sf.divideScale(0, 2)
-    val sf2 : Float = sf.divideScale(1, 2)
+    val sf1 : Float = sf.divideScale(0, parts)
+    val sf2 : Float = sf.divideScale(1, parts)
     drawRect(RectF(-size, 0f, size, h * sf1), paint)
     for (j in 0..1) {
         save()
@@ -36,7 +37,7 @@ fun Canvas.drawInverseColorT(scale : Float, w : Float, h : Float, paint : Paint)
         scale(1f - 2 * j, 1f)
         save()
         translate(size, 0f)
-        drawRect(RectF(0f, -size, (w / 2 - size) * sf2, 0f), paint)
+        drawRect(RectF(0f, - 1.5f * size, (w / 2 - size) * sf2, 0f), paint)
         restore()
         restore()
     }
