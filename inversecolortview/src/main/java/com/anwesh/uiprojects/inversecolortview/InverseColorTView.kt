@@ -28,8 +28,8 @@ fun Float.sinify() : Float = Math.sin(this * Math.PI).toFloat()
 fun Canvas.drawInverseColorT(scale : Float, w : Float, h : Float, paint : Paint) {
     val size : Float = w / sizeFactor
     val sf : Float = scale.sinify()
-    val sf1 : Float = sf.divideScale(0, parts)
-    val sf2 : Float = sf.divideScale(1, parts)
+    val sf1 : Float = sf.divideScale(0, parts + 1)
+    val sf2 : Float = sf.divideScale(1, parts + 1)
     drawRect(RectF(-size, 0f, size, h * sf1), paint)
     for (j in 0..1) {
         save()
