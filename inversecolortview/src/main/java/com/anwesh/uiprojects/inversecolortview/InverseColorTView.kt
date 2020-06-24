@@ -179,4 +179,27 @@ class InverseColorTView(ctx : Context) : View(ctx) {
         }
 
     }
+
+    data class Renderer(var view : InverseColorTView) {
+
+        private val animator : Animator = Animator(view)
+        private val ict : InverseColorT = InverseColorT(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            ict.draw(canvas, paint)
+            animator.animate {
+                ict.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            ict.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
