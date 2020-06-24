@@ -204,4 +204,13 @@ class InverseColorTView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : InverseColorTView {
+            val view : InverseColorTView = InverseColorTView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
